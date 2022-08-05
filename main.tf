@@ -12,6 +12,11 @@ terraform {
   }
 }
 
+variable "imageBuild" {
+  type        = string
+  description = "Latest Image Build"
+}
+
 resource "azurerm_resource_group" "tf_test" {
     name        = "tfmainrg"
     location    = "switzerlandnorth"
@@ -28,7 +33,7 @@ resource "azurerm_container_group" "tfcg_test" {
 
     container {
         name        = "weatherapi"
-        image       = "marco2409/weatherapi"
+        image       = "marco2409/weatherapi:${var.imageBuild}"
         cpu         = "1"
         memory      = "1"
 
